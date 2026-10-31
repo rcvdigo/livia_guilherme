@@ -1,0 +1,511 @@
+/* ============================================================
+   Livia & Guilherme — identidade visual v2
+   Fiel ao mockup da noiva: moldura botânica azul densa, papel
+   creme, foto B&W com rasgo de papel, caligrafia + serif caps.
+   ============================================================ */
+:root {
+  --creme:        #e8eff6; /* fundo único do site: azul bem claro (pedido da noiva, 31/10) */
+  --creme-escuro: #d9e4ef;
+  --azul:         #5c7ea0;
+  --azul-claro:   #a8bcd1;
+  --azul-tinta:   #3d5a7a;
+  --marinho:      #182f50; /* navy do monograma oficial (extraído de img/monograma.png) */
+  --carvao:       #2e2c29;
+  --grafite:      #57544b;
+  --borda:        #c3d2e1;
+  --branco:       #fffdf8;
+
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --sans:  "Jost", "Segoe UI", sans-serif;
+  --cali:  "Great Vibes", cursive;
+  --cali-fina: "Pinyon Script", cursive; /* caligrafia fina de convite (estilo Bickham Script) */
+
+  --flor-w: clamp(46px, 8.5vw, 116px);
+  /* margem do papel: toda a coluna de conteúdo fica AQUI, fora da moldura
+     floral (que cobre 0..--flor-w). Se algo sangrar para cá, some com a flor. */
+  --gutter: calc(var(--flor-w) + 1rem);
+  /* textura de papel (ruído sutil) */
+  --papel: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+  scroll-behavior: smooth;
+  /* base 18px (antes 16px): tudo que usa rem cresce ~12% p/ legibilidade
+     (pedido do casal, 31/10 — convidados de todas as idades) */
+  font-size: 18px;
+}
+body {
+  background: var(--creme);
+  color: var(--carvao);
+  font-family: var(--sans);
+  font-weight: 400; /* era 300 (Jost Light) — 400 legível sem parecer engessado */
+  line-height: 1.7;
+  overflow-x: hidden;
+  padding-inline: var(--gutter); /* nada de conteúdo sob a moldura floral */
+}
+img { display: block; max-width: 100%; }
+a { color: var(--azul-tinta); }
+::selection { background: var(--azul-claro); color: var(--carvao); }
+
+/* ---------- textura de papel sobre toda a página ---------- */
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: 30;
+  pointer-events: none; opacity: .3; background-image: var(--papel);
+}
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: none; /* vinheta removida: fundo em um tom só */
+}
+
+/* ---------- moldura floral lateral (tile gerado: img/flores.svg) ---------- */
+.florais {
+  position: fixed; top: 0; bottom: 0; width: var(--flor-w);
+  background-image: url("../img/flores.svg");
+  background-repeat: repeat-y;
+  background-size: 100% auto;
+  background-position-y: var(--par, 0px); /* parallax via JS */
+  pointer-events: none; z-index: 5;
+}
+.florais--esq { left: 0; }
+.florais--dir { right: 0; transform: scaleX(-1); }
+/* o conteúdo inteiro vive dentro de --gutter (ver body);
+   faixas full-blee (topbar/rodapé) escapam com margem negativa e
+   devolvem a mesma respiração via padding */
+@media (max-width: 560px) { :root { --flor-w: 42px; } }
+
+/* ---------- topo ---------- */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  margin-inline: calc(-1 * var(--gutter)); /* faixa full-blee por baixo das flores */
+  padding: 1rem var(--gutter);
+  background: rgba(232, 239, 246, .92);
+  backdrop-filter: blur(8px);
+  transition: padding .3s ease, box-shadow .3s ease;
+}
+.topbar.rolado {
+  padding-block: .45rem;
+  box-shadow: 0 8px 24px -14px rgba(46, 44, 41, .35);
+  border-bottom: 1px solid var(--creme-escuro);
+}
+.monograma { display: inline-flex; align-items: center; }
+.monograma img { height: 42px; width: auto; }
+.nav { display: flex; gap: 1.6rem; }
+.nav a {
+  font-size: .7rem; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--grafite); text-decoration: none; transition: color .2s;
+}
+.nav a:hover { color: var(--azul-tinta); }
+.nav-toggle {
+  display: none; background: none; border: 1px solid var(--borda);
+  border-radius: 4px; font-size: 1.1rem; color: var(--carvao); padding: .15rem .55rem;
+}
+@media (max-width: 760px) {
+  .nav-toggle { display: block; }
+  .nav {
+    position: absolute; top: 100%; right: 0; left: 0;
+    flex-direction: column; gap: 0; background: var(--creme);
+    border-bottom: 1px solid var(--borda);
+    left: var(--gutter); right: var(--gutter); /* menu fica dentro do papel */
+    max-height: 0; overflow: hidden; transition: max-height .3s ease;
+  }
+  .nav.aberto { max-height: 340px; }
+  .nav a { padding: .9rem 1.2rem; border-top: 1px solid var(--creme-escuro); }
+}
+
+/* ---------- entradas em cena ---------- */
+@keyframes subiu { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+@keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.07); } }
+[data-hero] { opacity: 0; animation: subiu 1s cubic-bezier(.2, .7, .3, 1) forwards; animation-delay: var(--d, 0s); }
+[data-reveal] { opacity: 0; transform: translateY(26px); transition: opacity .9s ease, transform .9s cubic-bezier(.2, .7, .3, 1); transition-delay: var(--rd, 0s); }
+[data-reveal].visivel { opacity: 1; transform: none; }
+
+/* ---------- HERO (fiel ao mockup) ---------- */
+.hero {
+  position: relative; z-index: 1;
+  min-height: calc(100svh - 64px);
+  display: flex; flex-direction: column; justify-content: center;
+  text-align: center;
+  padding: 2.2rem 0 3rem;
+}
+.hero__versiculo { max-width: 42ch; margin: 0 auto; }
+.hero__versiculo p {
+  font-family: var(--cali-fina);
+  font-size: clamp(1.5rem, 4vw, 2.15rem);
+  line-height: 1.35; color: var(--azul-tinta);
+}
+.hero__versiculo span {
+  display: block; margin-top: .5rem;
+  font-size: .62rem; letter-spacing: .34em; text-indent: .34em; text-transform: uppercase;
+  color: var(--grafite); opacity: .9;
+}
+.hero__monograma { display: flex; justify-content: center; margin-top: 1.2rem; }
+.hero__monograma img { height: clamp(104px, 21vw, 148px); width: auto; }
+.hero__foto {
+  width: min(640px, 94%);
+  margin: 2rem auto 0;
+  filter: drop-shadow(0 26px 34px rgba(61, 90, 122, .38));
+}
+.hero__foto img {
+  width: 100%; aspect-ratio: 13 / 10; object-fit: cover; object-position: 50% 24%;
+  filter: grayscale(1) contrast(1.06) brightness(1.02);
+  animation: kenburns 26s ease-in-out infinite alternate;
+}
+.hero__verso {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(1.05rem, 2.6vw, 1.35rem); line-height: 1.55;
+  color: var(--grafite); margin-top: 2.2rem;
+}
+.hero__nomes { margin-top: .5rem; }
+.hero__nomes img { width: min(520px, 86%); height: auto; margin-inline: auto; }
+.hero__convite {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(1.05rem, 2.6vw, 1.4rem);
+  color: var(--grafite); margin-top: .9rem;
+}
+.data-line {
+  display: grid; grid-template-columns: 1fr 1.15fr 1fr; align-items: center;
+  justify-items: center; column-gap: .6rem;
+  width: min(460px, 90%); margin: 2rem auto 0;
+  border-top: 1px solid var(--borda); border-bottom: 1px solid var(--borda);
+  padding: 1rem 0;
+  font-family: var(--serif); text-transform: uppercase;
+  font-feature-settings: "lnum" 1; /* algarismos de linha: senão o 1 parece um i */
+  color: var(--azul-tinta);
+}
+.data-line small { display: block; font-size: .7rem; letter-spacing: .32em; color: var(--grafite); }
+.data-line b { font-size: clamp(2rem, 6.5vw, 2.7rem); font-weight: 600; letter-spacing: .04em; line-height: 1; }
+.data-line .ano { font-size: clamp(1.35rem, 4.6vw, 1.85rem); letter-spacing: .08em; color: var(--carvao); }
+.countdown {
+  display: flex; justify-content: center; gap: clamp(1.2rem, 4.5vw, 2.4rem);
+  margin-top: 1.6rem;
+}
+.countdown div { display: grid; justify-items: center; }
+.countdown b { font-family: var(--serif); font-size: 1.7rem; font-weight: 500; font-feature-settings: "lnum" 1; }
+.countdown small { font-size: .7rem; letter-spacing: .28em; text-transform: uppercase; color: var(--grafite); }
+
+/* ---------- blocos genéricos ---------- */
+main { position: relative; z-index: 1; }
+.bloco {
+  max-width: 980px; margin: 0 auto;
+  padding: clamp(3.2rem, 9vh, 5.4rem) 0;
+  scroll-margin-top: 76px;
+}
+.bloco--centro { text-align: center; }
+.bloco__cabecalho { display: grid; justify-items: center; gap: .8rem; margin-bottom: 1.7rem; text-align: center; }
+.bloco__icone { width: 42px; height: 42px; color: var(--azul); }
+.bloco__titulo {
+  font-family: var(--serif); font-weight: 600;
+  font-size: clamp(1.15rem, 2.8vw, 1.55rem);
+  letter-spacing: .34em; text-indent: .34em; text-transform: uppercase;
+  color: var(--carvao); text-align: center;
+}
+.bloco__sub {
+  font-family: var(--serif); font-style: italic; color: var(--azul-tinta);
+  font-size: 1.05rem; letter-spacing: .08em;
+}
+.bloco__texto { max-width: 58ch; margin-inline: auto; color: var(--grafite); font-size: 1.05rem; }
+.bloco__texto b { color: var(--carvao); font-weight: 500; }
+.minusc { font-size: .85rem; color: var(--grafite); opacity: .9; margin-top: .6rem; }
+
+/* ---------- cards de eventos e ações rápidas ---------- */
+.acoes {
+  display: grid; gap: 1.2rem; margin-top: 2.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+.acao {
+  background: rgba(255, 255, 255, .55);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 2rem 1.3rem 1.7rem;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: .55rem;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.acao:hover { transform: translateY(-4px); box-shadow: 0 18px 34px -20px rgba(24, 47, 80, .4); }
+.acao__icone { width: 44px; height: 44px; color: var(--marinho); margin-bottom: .5rem; }
+.acao__titulo {
+  font-family: var(--serif); font-weight: 600;
+  font-size: 1.02rem; letter-spacing: .2em; text-indent: .2em; text-transform: uppercase;
+  color: var(--carvao); line-height: 1.4;
+}
+.acao__horario { font-family: var(--serif); font-weight: 600; font-size: 2rem; line-height: 1; color: var(--marinho); }
+.acao__local { font-family: var(--serif); font-style: italic; font-size: 1.02rem; color: var(--grafite); }
+.acao__endereco { font-size: .85rem; color: var(--grafite); opacity: .85; }
+.acao .botao { margin-top: auto; }
+
+/* ---------- botões (pílulas finas, como o mockup) ---------- */
+.botao {
+  align-self: center; margin-top: auto;
+  font-family: var(--sans); font-size: .72rem; letter-spacing: .3em; text-indent: .3em;
+  text-transform: uppercase; text-decoration: none; cursor: pointer;
+  color: var(--azul-tinta); background: transparent;
+  border: 1px solid var(--azul); border-radius: 999px;
+  padding: .72rem 1.7rem .68rem;
+  transition: background .25s, color .25s, border-color .25s;
+}
+.botao:hover { background: var(--azul); color: var(--branco); }
+.botao--marinho { background: var(--marinho); border-color: var(--marinho); color: #fffdf8; font-size: .78rem; padding: .95rem 2.5rem .9rem; }
+.botao--marinho:hover { background: #23406d; border-color: #23406d; color: #fffdf8; }
+
+/* ---------- lista de presentes ---------- */
+.grade-presentes {
+  display: grid; gap: 1.1rem; margin-top: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+}
+.presente {
+  position: relative;
+  background: rgba(255, 255, 255, .55);
+  border: 1px solid var(--borda); border-radius: 8px;
+  padding: 1.7rem 1.1rem 1.4rem;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: .45rem;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.presente:hover { transform: translateY(-4px); box-shadow: 0 18px 34px -20px rgba(61, 90, 122, .4); }
+.presente__num {
+  position: absolute; top: .7rem; left: .9rem;
+  font-family: var(--serif); font-size: .85rem; color: var(--azul-claro);
+  letter-spacing: .1em;
+}
+.presente h3 { font-family: var(--serif); font-weight: 500; font-size: 1.15rem; line-height: 1.3; min-height: 2.6em; display: flex; align-items: center; }
+.presente__preco { color: var(--azul-tinta); font-size: .95rem; letter-spacing: .05em; }
+.presente--comprado { opacity: .62; }
+/* desktop: 2x2 simétrico nos cards do Grande Dia e na prévia de presentes */
+@media (min-width: 700px) {
+  .acoes,
+  .grade-presentes[data-limite] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 720px; margin-inline: auto;
+  }
+}
+/* lista completa (presentes.html): colunas que fecham certo com 8 itens */
+@media (min-width: 700px) {
+  .grade-presentes:not([data-limite]) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1000px) {
+  .grade-presentes:not([data-limite]) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+.presentes__mais { margin-top: 2.4rem; }
+.presentes__mais .botao { display: inline-block; }
+.selo-ok {
+  font-family: var(--serif); font-style: italic; font-size: 1.05rem;
+  color: var(--azul-tinta);
+  border: 1px dashed var(--azul-claro); border-radius: 999px;
+  padding: .45rem 1rem;
+}
+.selo-breve {
+  font-family: var(--serif); font-style: italic; font-size: .95rem;
+  color: var(--grafite); opacity: .8;
+  border: 1px dashed var(--borda); border-radius: 999px;
+  padding: .45rem 1rem;
+}
+.grade-vazia { max-width: 42ch; margin: 1.6rem auto 0; }
+
+/* ---------- galeria ---------- */
+.galeria { display: grid; gap: 1.2rem; margin-top: 2.2rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.galeria figure { overflow: hidden; border: 1px solid var(--borda); padding: 6px; background: var(--branco); }
+.galeria img {
+  width: 100%; aspect-ratio: 3 / 4; object-fit: cover;
+  filter: grayscale(1) contrast(1.05);
+  cursor: zoom-in;
+  transition: transform .4s ease, filter .4s ease;
+}
+.galeria img:hover { transform: scale(1.03); filter: grayscale(.15); }
+
+/* lightbox */
+.lightbox { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: rgba(30, 30, 32, .93); padding: 2rem; }
+.lightbox[hidden] { display: none; }
+.lightbox img { max-width: 92vw; max-height: 84vh; border: 6px solid var(--branco); filter: grayscale(1); }
+.lightbox__fechar { position: absolute; top: 1.2rem; right: 1.6rem; background: none; border: none; color: var(--branco); font-size: 1.4rem; cursor: pointer; }
+
+/* ---------- história ---------- */
+.caligrafia {
+  font-family: var(--cali);
+  font-size: clamp(1.8rem, 5.5vw, 3rem);
+  color: var(--azul-tinta); line-height: 1.35;
+  margin-bottom: 1.2rem;
+}
+
+/* ---------- rodapé ---------- */
+.rodape {
+  text-align: center;
+  margin-inline: calc(-1 * var(--gutter)); /* faixa full-blee por baixo das flores */
+  padding: 3.4rem var(--gutter) 2.6rem;
+  border-top: 1px solid var(--creme-escuro);
+  background: transparent;
+  color: var(--grafite); font-size: .9rem;
+}
+.rodape__nomes { font-size: clamp(2.2rem, 6vw, 3.2rem); color: var(--carvao); }
+.rodape small { display: block; margin-top: .8rem; opacity: .6; font-size: .72rem; letter-spacing: .15em; }
+
+/* ---------- RSVP (Marque a Data) ---------- */
+.rsvp { max-width: 520px; margin: 0 auto; }
+.rsvp input {
+  width: 100%; background: transparent; border: none; outline: none;
+  border-bottom: 1px solid var(--borda);
+  font-family: var(--sans); font-weight: 400; font-size: 1.05rem;
+  text-align: center; padding: .55rem 0 .5rem;
+  color: var(--carvao); caret-color: var(--azul);
+}
+.rsvp input:focus { border-bottom-color: var(--azul); }
+.rsvp input::placeholder { color: var(--grafite); opacity: .6; letter-spacing: .04em; }
+.rsvp__status { min-height: 3.2rem; margin-top: 1.4rem; display: grid; justify-items: center; }
+.rsvp__dica { color: var(--grafite); font-size: .98rem; }
+.rsvp__dica--erro { color: var(--azul-tinta); }
+.rsvp__cartao-nome {
+  font-family: var(--serif); font-weight: 600;
+  font-size: 1.7rem; color: var(--carvao); letter-spacing: .02em;
+}
+.rsvp__cartao-msg { font-size: .95rem; color: var(--grafite); margin: .4rem 0 1rem; }
+.rsvp__prazo { margin-top: 1.6rem; font-style: italic; }
+.rsvp__chips { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin-top: .9rem; }
+.chip {
+  font-family: var(--sans); font-size: .82rem; cursor: pointer;
+  background: transparent; color: var(--azul-tinta);
+  border: 1px solid var(--azul-claro); border-radius: 999px;
+  padding: .42rem 1.05rem .38rem;
+  transition: background .2s, color .2s;
+}
+button.chip:hover { background: var(--azul-claro); color: var(--carvao); }
+.chip--ok { border-style: dashed; opacity: .9; }
+.rsvp__mural-titulo {
+  font-family: var(--serif); font-style: italic;
+  font-size: 1.15rem; color: var(--azul-tinta); margin-top: 1.2rem;
+}
+
+/* ---------- dress code (convite florido — réplica do modelo da noiva) ---------- */
+#dresscode { position: relative; }
+.dress-in {
+  position: relative; max-width: 980px; margin: 0 auto;
+  padding: clamp(3.4rem, 8vw, 5rem) 5rem; /* 80px > moldura lateral de 64px */
+  background: var(--creme); /* mesmo azul do site; precisa ser sólido p/ o multiply das artes (main isola o blend) */
+}
+/* moldura floral nas quatro bordas da "convite" */
+.dc-frame { position: absolute; pointer-events: none; }
+.dc-frame--t { top: 0; left: 0; right: 0; height: 78px; background: url("../img/flores-h.svg") repeat-x; background-size: auto 100%; }
+.dc-frame--b { bottom: 0; left: 0; right: 0; height: 78px; background: url("../img/flores-h.svg") repeat-x; background-size: auto 100%; }
+.dc-frame--l { top: 78px; bottom: 78px; left: 0; width: 64px; background: url("../img/flores.svg") repeat-y; background-size: 100% auto; }
+.dc-frame--r { top: 78px; bottom: 78px; right: 0; width: 64px; background: url("../img/flores.svg") repeat-y; background-size: 100% auto; }
+@media (max-width: 700px) {
+  /* card em largura total: as florais fixas do site já fazem as bordas laterais,
+     então o card escapa do gutter e dispensa molduras laterais internas */
+  .dress-in { margin-inline: calc(-1 * var(--gutter)); padding-inline: calc(var(--flor-w) + 14px); }
+  .dc-frame--t, .dc-frame--b { height: 52px; }
+  .dc-frame--l, .dc-frame--r { display: none; }
+  .dc__pill {
+    font-size: 1.02rem; letter-spacing: .1em; text-indent: .1em;
+    padding: .45rem 1.5rem .4rem;
+  }
+  .dc__lado img { height: min(300px, 78vw); }
+}
+/* título + subtítulo — medidas e cores amostradas do modelo */
+#dresscode .bloco__cabecalho { gap: .5rem; margin-bottom: 1.7rem; }
+#dresscode .bloco__titulo {
+  font-size: clamp(1.75rem, 5.5vw, 4.4rem);
+  letter-spacing: .1em; text-indent: .1em;
+  color: #4c586e;
+}
+#dresscode .bloco__sub {
+  font-style: normal; font-weight: 500;
+  font-size: clamp(1.15rem, 2.6vw, 1.5rem); letter-spacing: .03em;
+  color: #4c586e;
+}
+#dresscode .bloco__sub--cali {
+  font-family: var(--cali);
+  font-size: clamp(1.35rem, 3vw, 1.7rem); line-height: 1.32; letter-spacing: .01em;
+  color: #5a6c8c; margin-top: -.2rem;
+}
+.bloco__sub .cali {
+  font-family: var(--cali); font-style: normal;
+  font-size: 1.42rem; line-height: 1.3; letter-spacing: .02em;
+  color: var(--azul-tinta);
+}
+.dc { display: grid; gap: 2rem; margin-top: 0; grid-template-columns: 1fr; justify-items: center; }
+.dc__div { display: none; }
+.dc__lado { display: grid; justify-items: center; gap: .55rem; text-align: center; }
+.dc__pill {
+  position: relative; z-index: 1; margin-bottom: .3rem;
+  font-family: var(--serif); font-weight: 600;
+  font-size: clamp(1.15rem, 2.4vw, 1.4rem); letter-spacing: .18em; text-indent: .18em; text-transform: uppercase;
+  color: #44506a; white-space: nowrap;
+  padding: .5rem 2.5rem .45rem;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 380 100' preserveAspectRatio='none'%3E%3Cpath d='M30 55C18 40 40 26 78 22 130 16 176 26 226 20 272 14 322 12 350 24 368 32 372 46 360 56 370 68 352 80 318 82 268 86 214 74 168 82 120 90 66 88 40 80 20 74 14 64 30 55Z' fill='%23ccd9e8'/%3E%3Cpath d='M48 50C60 34 120 30 180 34 240 38 300 30 340 40 352 46 350 58 336 62 296 72 236 62 176 66 120 70 70 68 56 60 48 56 44 54 48 50Z' fill='%23dbe6f1' opacity='.65'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+.dc__desc { font-family: var(--sans); font-weight: 400; font-size: 1.1rem; line-height: 1.55; color: #5c6b7e; margin-top: .8rem; }
+.dc__lado img { height: min(330px, 86vw); width: auto; max-width: 96%; margin: .9rem 0 .2rem; }
+/* as artes têm papel #f5f5f3: clareia até o branco e multiplica para sumir no fundo azul */
+.dc__lado img, .dc__proibicoes img { filter: brightness(1.05); mix-blend-mode: multiply; }
+.dc__lista { list-style: none; text-align: left; max-width: 34ch; margin-top: 1rem; display: grid; gap: .7rem; justify-self: center; }
+.dc__lista li { position: relative; padding-left: 1.55rem; font-family: var(--sans); font-size: .95rem; line-height: 1.5; color: #5c6b7e; }
+.dc__lista li::before {
+  content: ""; position: absolute; left: 0; top: .3em; width: 13px; height: 13px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M2.3 13.7C2.7 7.6 7.5 2.7 13.7 2.3c-.4 6.2-5.2 11.1-11.4 11.4z' fill='%237d8ca3'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.dc__lista b { color: #4c586e; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+@media (min-width: 760px) {
+  .dc { grid-template-columns: 1fr 1px 1fr; gap: 2rem 2.8rem; }
+  .dc__div { display: block; background: linear-gradient(180deg, transparent, #cfd4cf 12%, #cfd4cf 88%, transparent); }
+}
+.dc__nao { margin-top: 3.2rem; }
+.dc__nao h3 {
+  font-family: var(--serif); font-weight: 600;
+  font-size: 1.05rem; letter-spacing: .3em; text-indent: .3em; text-transform: uppercase;
+  color: #4c586e; margin-bottom: 1.7rem;
+}
+.dc__proibicoes { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 1.2rem 1.4rem; }
+.dc__proibicoes li { width: 148px; display: grid; justify-items: center; gap: .65rem; }
+.dc__proibicoes img { width: 72px; height: 72px; }
+.dc__proibicoes span { font-family: var(--sans); font-size: .68rem; letter-spacing: .13em; text-transform: uppercase; color: #5c6b7e; line-height: 1.55; text-align: center; }
+@media (max-width: 700px) {
+  .dc__proibicoes li { width: 42%; } /* 2 ícones por linha (após a regra base de 148px) */
+}
+
+/* ---------- modal de presente ---------- */
+.modal {
+  position: fixed; inset: 0; z-index: 100;
+  display: grid; place-items: center;
+  background: rgba(30, 30, 32, .55); backdrop-filter: blur(3px);
+  padding: 1.4rem;
+}
+.modal[hidden] { display: none; }
+.modal__caixa {
+  position: relative; width: min(420px, 100%);
+  background: var(--creme); border: 1px solid var(--borda); border-radius: 10px;
+  box-shadow: 0 30px 60px -25px rgba(30, 30, 32, .5);
+  padding: 2.4rem 1.8rem 2rem; text-align: center;
+  animation: subiu .35s cubic-bezier(.2, .7, .3, 1);
+}
+.modal__fechar {
+  position: absolute; top: .7rem; right: .9rem;
+  background: none; border: none; font-size: 1.1rem;
+  color: var(--grafite); cursor: pointer;
+}
+.modal__rotulo {
+  font-size: .62rem; letter-spacing: .34em; text-indent: .34em; text-transform: uppercase;
+  color: var(--grafite);
+}
+.modal__nome {
+  font-family: var(--serif); font-weight: 600; font-size: 1.55rem;
+  margin: .5rem 0 .2rem; color: var(--carvao);
+}
+.modal__preco {
+  font-family: var(--serif); font-size: 1.9rem; font-weight: 600;
+  color: var(--azul-tinta); margin-bottom: 1rem;
+}
+.modal__meios { display: flex; gap: .5rem; justify-content: center; margin-bottom: 1rem; }
+.modal__meios span {
+  font-size: .6rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--grafite); border: 1px solid var(--borda); border-radius: 6px;
+  padding: .3rem .55rem .26rem;
+}
+.modal__cta { display: inline-block; margin-top: .6rem; }
+
+/* ---------- movimento reduzido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  [data-hero], [data-reveal] { opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important; }
+  .hero__foto img { animation: none; }
+  * { transition-duration: .01ms !important; }
+}

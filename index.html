@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Livia &amp; Guilherme — 01 de Maio de 2027</title>
+  <!-- TODO LIVIA: conferir data, horário e locais antes de publicar -->
+  <meta name="description" content="Livia & Guilherme têm a honra de convidar você para o nosso casamento — sábado, 01 de maio de 2027. Confirme sua presença.">
+  <meta property="og:title" content="Livia &amp; Guilherme — Casamento">
+  <meta property="og:description" content="01 · 05 · 2027 — Temos a honra de convidá-lo para o nosso casamento.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://rcvdigo.github.io/livia_guilherme/">
+  <meta property="og:image" content="https://rcvdigo.github.io/livia_guilherme/img/og.jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="pt_BR">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/foto-deckle.css">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+</head>
+<body>
+
+  <!-- moldura floral lateral (tile gerado) -->
+  <div class="florais florais--esq" aria-hidden="true"></div>
+  <div class="florais florais--dir" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="monograma" href="#inicio" aria-label="Início"><img src="img/monograma.png" alt=""></a>
+    <nav class="nav" id="nav" aria-label="Navegação principal">
+      <a href="#dia">O Grande Dia</a>
+      <a href="#presenca">Presença</a>
+      <a href="#presentes">Presentes</a>
+      <a href="#dresscode">Dress Code</a>
+      <a href="#galeria">Momentos</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+  </header>
+
+  <main>
+    <!-- ============ SEÇÃO 1 — HERO (monograma, nomes, data, versículo) ============ -->
+    <section class="hero" id="inicio">
+      <div class="hero__versiculo" data-hero style="--d:.1s">
+        <p>“Nós amamos porque Ele nos amou primeiro”</p>
+        <span>1 João 4:19</span>
+      </div>
+      <div class="hero__monograma" data-hero style="--d:.3s">
+        <img src="img/monograma.png" alt="Monograma L &amp; G">
+      </div>
+      <!-- TODO LIVIA: trocar por uma foto B&W mais nítida quando houver -->
+      <figure class="hero__foto foto-deckle" data-hero style="--d:.55s">
+        <img src="img/casal-olhando.jpg" alt="Livia e Guilherme rindo um com o outro">
+      </figure>
+      <p class="hero__verso" data-hero style="--d:.8s">Com muito amor, a bênção de Deus<br>e de nossas famílias, nós</p>
+      <h1 class="hero__nomes" data-hero style="--d:1.05s"><img src="img/nomes.png" alt="Livia &amp; Guilherme"></h1>
+      <p class="hero__convite" data-hero style="--d:1.3s">Temos a honra de convidá-lo para celebrar o nosso casamento</p>
+      <div class="data-line" data-hero style="--d:1.5s">
+        <span class="data-line__col"><small>Sábado</small></span>
+        <span class="data-line__col"><b>01</b><small>Maio</small></span>
+        <span class="data-line__col"><b class="ano">2027</b></span>
+      </div>
+      <div class="countdown" id="countdown" data-hero style="--d:1.7s" aria-label="Contagem regressiva para o casamento">
+        <div><b id="cd-d">—</b><small>dias</small></div>
+        <div><b id="cd-h">—</b><small>horas</small></div>
+        <div><b id="cd-m">—</b><small>min</small></div>
+        <div><b id="cd-s">—</b><small>seg</small></div>
+      </div>
+    </section>
+
+    <!-- ============ SEÇÃO 2 — CARDS DE EVENTOS E AÇÕES RÁPIDAS ============ -->
+    <section class="bloco" id="dia">
+      <div class="bloco__cabecalho" data-reveal>
+        <svg class="bloco__icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="3.5" y="5" width="17" height="16" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="m9.5 15.5 2 2 3.5-4.5"/></svg>
+        <h2 class="bloco__titulo">O Grande Dia</h2>
+        <p class="bloco__sub">cada momento, um reencontro</p>
+      </div>
+      <div class="acoes">
+        <article class="acao" data-reveal>
+          <svg class="acao__icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12.3 2.6 2.7L16 9"/></svg>
+          <h3 class="acao__titulo">Confirme a sua Presença</h3>
+          <a class="botao botao--marinho" href="#presenca">Clique aqui</a>
+        </article>
+        <article class="acao" data-reveal style="--rd:.08s">
+          <svg class="acao__icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M4 11h16v9H4zM2 7h20v4H2zM12 7v13M12 7c-4 0-5.5-4.5-3-5.5S12 4 12 7zm0 0c4 0 5.5-4.5 3-5.5S12 4 12 7z"/></svg>
+          <h3 class="acao__titulo">Lista de Presentes</h3>
+          <a class="botao botao--marinho" href="#presentes">Clique aqui</a>
+        </article>
+        <article class="acao" id="cerimonia" data-reveal style="--rd:.16s">
+          <svg class="acao__icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M12 2.5v4M10 4.5h4"/><path d="M5 21V11.5L12 6l7 5.5V21"/><path d="M3 21h18M5 11.5h14"/><path d="M10.5 21v-4.5a1.5 1.5 0 0 1 3 0V21"/></svg>
+          <p class="acao__horario">16:00</p>
+          <h3 class="acao__titulo">Cerimônia</h3>
+          <p class="acao__local">Paróquia São Lucas Evangelista</p>
+          <p class="acao__endereco">Av. Inocêncio Seráfico, 2200 — Vila Silva Ribeiro</p>
+          <a class="botao botao--marinho" target="_blank" rel="noopener"
+             href="https://www.google.com/maps/search/?api=1&amp;query=Par%C3%B3quia+S%C3%A3o+Lucas+Evangelista%2C+Av.+Inoc%C3%AAncio+Ser%C3%A1fico%2C+2200+-+Vila+Silva+Ribeiro">Clique aqui</a>
+        </article>
+        <article class="acao" id="recepcao" data-reveal style="--rd:.24s">
+          <svg class="acao__icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M4 10l8-6 8 6"/><path d="M6 10v10M18 10v10M4 20h16M10 10v10M14 10v10"/></svg>
+          <p class="acao__horario">18:30</p>
+          <h3 class="acao__titulo">Recepção</h3>
+          <p class="acao__local">Espaço Mariana</p>
+          <p class="acao__endereco">Av. Rui Barbosa, 2743 — Vila Santa Terezinha, Carapicuíba</p>
+          <a class="botao botao--marinho" target="_blank" rel="noopener"
+             href="https://maps.app.goo.gl/5NNAHqxyvUBiujkr8">Clique aqui</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ SEÇÃO 3 — RSVP (mesmo mecanismo do amabillyegabriel.com) ============ -->
+    <!-- Nomes cadastrados em js/dados.js; confirmações via Apps Script (README) -->
+    <section class="bloco bloco--centro" id="presenca">
+      <div class="bloco__cabecalho" data-reveal>
+        <svg class="bloco__icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="12" cy="12" r="9.2"/><path d="m8 12.3 2.6 2.7L16 9"/></svg>
+        <h2 class="bloco__titulo">Confirme a sua Presença</h2>
+        <p class="bloco__sub">sua presença é o nosso maior presente</p>
+      </div>
+      <div class="rsvp" data-reveal>
+        <input type="text" id="rsvpInput" placeholder="Digite seu nome" autocomplete="off" spellcheck="false"
+               aria-label="Digite seu nome">
+        <div id="rsvpStatus" class="rsvp__status" aria-live="polite"></div>
+        <div class="rsvp__mural" id="rsvpMural" hidden></div>
+      </div>
+      <p class="minusc rsvp__prazo" id="rsvpPrazo" data-reveal></p>
+    </section>
+
+    <!-- ============ SEÇÃO 4 — PRESENTES (Mercado Pago) ============ -->
+    <!-- itens em js/dados.js: link do Mercado Pago em "link"; pago? "comprado": true -->
+    <!-- aqui só os 4 primeiros (data-limite); a lista completa fica em presentes.html -->
+    <section class="bloco bloco--centro" id="presentes">
+      <div class="bloco__cabecalho" data-reveal>
+        <svg class="bloco__icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M4 11h16v9H4zM2 7h20v4H2zM12 7v13M12 7c-4 0-5.5-4.5-3-5.5S12 4 12 7zm0 0c4 0 5.5-4.5 3-5.5S12 4 12 7z"/></svg>
+        <h2 class="bloco__titulo">Presentes</h2>
+        <p class="bloco__sub">seu carinho já é o suficiente</p>
+      </div>
+      <p class="bloco__texto" data-reveal>Se quiser, escolhemos algumas opções — o pagamento vai
+      <b>direto para a nossa conta</b>, sem site intermediário, por PIX, cartão (com parcelamento) ou boleto.</p>
+      <div class="grade-presentes" id="gradePresentes" data-limite="4"></div>
+      <p class="presentes__mais" id="verTodos" hidden>
+        <a class="botao botao--marinho" href="presentes.html">Ver todos os presentes</a>
+      </p>
+      <noscript><p class="minusc">Ative o JavaScript para ver a lista de presentes.</p></noscript>
+    </section>
+
+    <!-- ============ SEÇÃO 5 — DRESS CODE (convite florido — modelo da noiva) ============ -->
+    <section class="bloco bloco--centro" id="dresscode">
+      <div class="dress-in" data-reveal>
+        <span class="dc-frame dc-frame--t" aria-hidden="true"></span>
+        <span class="dc-frame dc-frame--b" aria-hidden="true"></span>
+        <span class="dc-frame dc-frame--l" aria-hidden="true"></span>
+        <span class="dc-frame dc-frame--r" aria-hidden="true"></span>
+
+        <div class="bloco__cabecalho">
+          <h2 class="bloco__titulo">Dress Code</h2>
+          <p class="bloco__sub">Sua presença já é muito especial para nós.</p>
+          <p class="bloco__sub bloco__sub--cali">E para que tudo fique ainda mais lindo,<br>
+          seguimos algumas orientações:</p>
+        </div>
+
+        <div class="dc">
+          <div class="dc__lado">
+            <h3 class="dc__pill">Para elas</h3>
+            <p class="dc__desc">Vestidos longos,<br>fluidos e elegantes.</p>
+            <img src="img/dc-elas.jpg" alt="Ilustração de duas convidadas com vestidos longos, um verde em camadas e outro amarelo">
+            <ul class="dc__lista">
+              <li>Evitar tons de azul claro ou serenity.</li>
+              <li><b>Branco e tons muito próximos ao branco estão proibidos</b>, para não gerar dúvida com o vestido da noiva.</li>
+            </ul>
+          </div>
+          <span class="dc__div" aria-hidden="true"></span>
+          <div class="dc__lado">
+            <h3 class="dc__pill">Para eles</h3>
+            <p class="dc__desc">Visual alinhado,<br>elegante e respeitoso.</p>
+            <img src="img/dc-eles.jpg" alt="Ilustração de dois convidados, um de terno escuro e outro de camisa social com calça oliva">
+            <ul class="dc__lista">
+              <li>Calça social ou de alfaiataria.</li>
+              <li>Camisa social.</li>
+              <li>Blazer é opcional.</li>
+              <li>Sapato fechado.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="dc__nao" data-reveal>
+          <h3>Não é permitido</h3>
+          <ul class="dc__proibicoes">
+            <li>
+              <img src="img/dc-p1.jpg" alt="">
+              <span>Boné</span>
+            </li>
+            <li>
+              <img src="img/dc-p2.jpg" alt="">
+              <span>Bermudas</span>
+            </li>
+            <li>
+              <img src="img/dc-p3.jpg" alt="">
+              <span>Chinelos / sandálias tipo havaianas</span>
+            </li>
+            <li>
+              <img src="img/dc-p4.jpg" alt="">
+              <span>Roupas esportivas</span>
+            </li>
+            <li>
+              <img src="img/dc-p5.jpg" alt="">
+              <span>Qualquer peça muito esportiva ou casual</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SEÇÃO 6 — GALERIA / NOSSOS MOMENTOS ============ -->
+    <section class="bloco" id="galeria">
+      <div class="bloco__cabecalho" data-reveal>
+        <svg class="bloco__icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M3 8h4l2-3h6l2 3h4v12H3zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+        <h2 class="bloco__titulo">Nossos Momentos</h2>
+        <p class="bloco__sub">alguns registros do nosso caminho até aqui</p>
+      </div>
+      <div class="galeria">
+        <figure data-reveal><img src="img/casal-frente.jpg" alt="Livia e Guilherme juntos" loading="lazy"></figure>
+        <figure data-reveal><img src="img/casal-anel.jpg" alt="Anel de noivato" loading="lazy"></figure>
+        <figure data-reveal><img src="img/casal-olhando.jpg" alt="Olhares trocados" loading="lazy"></figure>
+        <!-- TODO LIVIA: adicionar mais fotos (pré-wedding etc.) aqui -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p class="caligrafia rodape__nomes">Livia &amp; Guilherme</p>
+    <p>01 · 05 · 2027 — esperamos por vocês</p>
+    <small>Feito com amor (e HTML)</small>
+  </footer>
+
+  <!-- lightbox simples -->
+  <div class="lightbox" id="lightbox" hidden>
+    <img src="" alt="">
+    <button class="lightbox__fechar" aria-label="Fechar">✕</button>
+  </div>
+
+  <!-- modal de presente ("Ver detalhes", modelo da referência) -->
+  <div class="modal" id="modalPresente" hidden>
+    <div class="modal__caixa">
+      <button class="modal__fechar" type="button" aria-label="Fechar">✕</button>
+      <p class="modal__rotulo">Seu presente</p>
+      <h3 class="modal__nome" id="modalNome"></h3>
+      <p class="modal__preco" id="modalPreco"></p>
+      <div class="modal__meios" aria-label="Formas de pagamento">
+        <span title="PIX">PIX</span><span title="Cartão de crédito">Cartão</span><span title="Boleto">Boleto</span><span title="Parcelamento em até 12x">12×</span>
+      </div>
+      <p class="minusc" id="modalNota">Pagamento direto para a conta do casal, via Mercado Pago.</p>
+      <a class="botao botao--marinho modal__cta" id="modalCta" target="_blank" rel="noopener">Faça o pagamento</a>
+    </div>
+  </div>
+
+  <script src="js/dados.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

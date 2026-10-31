@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Presentes — Livia &amp; Guilherme</title>
+  <meta name="description" content="Lista de presentes do casamento de Livia & Guilherme — 01 de maio de 2027.">
+  <meta property="og:title" content="Lista de Presentes — Livia &amp; Guilherme">
+  <meta property="og:description" content="01 · 05 · 2027 — Escolha o seu presente, com pagamento direto para o casal.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://rcvdigo.github.io/livia_guilherme/presentes.html">
+  <meta property="og:image" content="https://rcvdigo.github.io/livia_guilherme/img/og.jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="pt_BR">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+</head>
+<body>
+
+  <!-- moldura floral lateral (tile gerado) -->
+  <div class="florais florais--esq" aria-hidden="true"></div>
+  <div class="florais florais--dir" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="monograma" href="index.html#inicio" aria-label="Início"><img src="img/monograma.png" alt=""></a>
+    <nav class="nav" id="nav" aria-label="Navegação principal">
+      <a href="index.html#dia">O Grande Dia</a>
+      <a href="index.html#presenca">Presença</a>
+      <a href="presentes.html" aria-current="page">Presentes</a>
+      <a href="index.html#dresscode">Dress Code</a>
+      <a href="index.html#galeria">Momentos</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+  </header>
+
+  <main>
+    <!-- lista completa; itens em js/dados.js (a mesma lista da página principal) -->
+    <section class="bloco bloco--centro" id="presentes">
+      <div class="bloco__cabecalho" data-reveal>
+        <svg class="bloco__icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M4 11h16v9H4zM2 7h20v4H2zM12 7v13M12 7c-4 0-5.5-4.5-3-5.5S12 4 12 7zm0 0c4 0 5.5-4.5 3-5.5S12 4 12 7z"/></svg>
+        <h1 class="bloco__titulo">Lista de Presentes</h1>
+        <p class="bloco__sub">seu carinho já é o suficiente</p>
+      </div>
+      <p class="bloco__texto" data-reveal>Se quiser, escolhemos algumas opções — o pagamento vai
+      <b>direto para a nossa conta</b>, sem site intermediário, por PIX, cartão (com parcelamento) ou boleto.</p>
+      <div class="grade-presentes" id="gradePresentes"></div>
+      <noscript><p class="minusc">Ative o JavaScript para ver a lista de presentes.</p></noscript>
+      <p class="presentes__mais">
+        <a class="botao" href="index.html#presentes">← Voltar ao site</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <p class="caligrafia rodape__nomes">Livia &amp; Guilherme</p>
+    <p>01 · 05 · 2027 — esperamos por vocês</p>
+    <small>Feito com amor (e HTML)</small>
+  </footer>
+
+  <!-- modal de presente ("Ver detalhes", modelo da referência) -->
+  <div class="modal" id="modalPresente" hidden>
+    <div class="modal__caixa">
+      <button class="modal__fechar" type="button" aria-label="Fechar">✕</button>
+      <p class="modal__rotulo">Seu presente</p>
+      <h3 class="modal__nome" id="modalNome"></h3>
+      <p class="modal__preco" id="modalPreco"></p>
+      <div class="modal__meios" aria-label="Formas de pagamento">
+        <span title="PIX">PIX</span><span title="Cartão de crédito">Cartão</span><span title="Boleto">Boleto</span><span title="Parcelamento em até 12x">12×</span>
+      </div>
+      <p class="minusc" id="modalNota">Pagamento direto para a conta do casal, via Mercado Pago.</p>
+      <a class="botao botao--marinho modal__cta" id="modalCta" target="_blank" rel="noopener">Faça o pagamento</a>
+    </div>
+  </div>
+
+  <script src="js/dados.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
